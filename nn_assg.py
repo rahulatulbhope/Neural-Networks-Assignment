@@ -105,10 +105,10 @@ Y_new = np.reshape(Y_new,(1,891))
 Y_new[0][0] = -1
 print(out.shape)
 print(Y_new.shape)
-print(accuracy_score(out_1,Y_new) * 100)
+#print(accuracy_score(out_1,Y_new) * 100)
 
 
-print(confusion_matrix(y_true=out,y_pred=Y_new))
+print(confusion_matrix(y_true=Y_true,y_pred=Y_pred))
 
 
 
