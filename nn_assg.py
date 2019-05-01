@@ -2,6 +2,7 @@ import numpy as np
 from numpy import genfromtxt
 
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
 
 # input array
 X = genfromtxt('train_x_labels.csv',delimiter=',')  # train data
@@ -85,17 +86,37 @@ print(accuracy_score(Y_true,Y_pred) * 100)
 
 
 
+
+#Y_new = np.reshape(Y_new,(1,891))
+#print(accuracy_score(Y_true,Y_new) * 100)
+
 M = test  # test data
 M [0][0] = 0
 M_flat = M.T
-#print(W, b)
+print(W, b)
 out = np.array(activation_function(np.dot(W.T, M_flat) + b))
 out_1 = np.where(out > 0,1,-1)
 out_1 = out_1.T
-np.savetxt("foo_3.csv", out_1, delimiter=",")
+np.savetxt("foo_4.csv", out_1, delimiter=",")
+print(out_1)
+
+Y_new = genfromtxt('classify_op.csv',delimiter=',')  # testing with this
+Y_new = np.reshape(Y_new,(1,891))
+Y_new[0][0] = -1
+print(out.shape)
+print(Y_new.shape)
+print(accuracy_score(out_1,Y_new) * 100)
+
+
+print(confusion_matrix(y_true=out,y_pred=Y_new))
+
+
+
 
 #for d in np.nditer(out, op_flags=['readwrite']):
 #    print(d)
 
 #print(np.shape(out))
 #print(np.shape(Y))
+
+
